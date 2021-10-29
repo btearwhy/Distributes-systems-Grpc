@@ -1,0 +1,89 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+option java_multiple_files = true;
+option java_package = "org.example.AlmaOnline.server";
+option java_outer_classname = "AlmaOnlineProto";
+option objc_class_prefix = "AO";
+
+package almaonline;
+
+service AlmaOnline {
+    rpc GetRestaurants(Empty) returns (RestaurantsInformation);
+    rpc GetMenu(RestaurantIDRequest) returns (MenuM);
+    rpc CreateDineInOrder(DineInOrderRequest) returns (SuccessOrNot);
+    rpc CreateDeliveryOrder(DeliveryOrderRequest) returns (SuccessOrNot);
+    rpc GetOrder(OrderRequest) returns (OrderM);
+}
+
+message Empty{}
+
+message RestaurantIDRequest{
+    string id = 1;
+}
+
+message SuccessOrNot{
+    int32 statusCode = 1;
+}
+
+message ItemM{
+    string name = 1;
+    double price = 2;
+}
+
+message MenuM{
+    repeated ItemM item = 1;
+}
+
+message OrderM{
+    string id = 1;
+    string creationDate = 2;
+    string customer = 3;
+    repeated ItemM items = 4;
+}
+
+message DineInOrderRequest{
+    DineInOrderM order = 1;
+    string restaurantId = 2;
+}
+
+message DeliveryOrderRequest{
+    DeliveryOrderM order = 1;
+    string restaurantId = 2;
+}
+
+message DineInOrderM{
+    OrderM order = 1;
+    string reservationDate = 2;
+}
+
+message DeliveryOrderM{
+    OrderM order = 1;
+    string deliveryAddress = 2;
+}
+
+message RestaurantM{
+    string id = 1;
+    string name = 2;
+    MenuM menu = 3;
+    repeated OrderM orders = 4;
+}
+
+message RestaurantsM{
+    repeated RestaurantM restaurants = 1;
+}
+
+message OrderRequest{
+    string restaurantId = 1;
+    string orderId = 2;
+}
+
+message RestaurantInformation{
+    string id = 1;
+    string name = 2;
+}
+
+message RestaurantsInformation{
+    repeated RestaurantInformation restaurantInfo = 1;
+}
