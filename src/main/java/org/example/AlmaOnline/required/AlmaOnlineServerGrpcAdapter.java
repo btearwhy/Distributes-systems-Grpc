@@ -68,8 +68,8 @@ public class AlmaOnlineServerGrpcAdapter extends AlmaOnlineGrpc.AlmaOnlineImplBa
                 items.add(itemM.getName());
             }
             DineInOrderQuote dIOQ = new DineInOrderQuote(orderM.getId(),
-                    new SimpleDateFormat("yyyy-MM-dd").parse(orderM.getCreationDate()),
-                    orderM.getCustomer(), items, new SimpleDateFormat("yyyy-MM-dd").parse(request.getOrder().getReservationDate()));
+                    new SimpleDateFormat("yyyyMMddHHmmss").parse(orderM.getCreationDate()),
+                    orderM.getCustomer(), items, new SimpleDateFormat("yyyyMMddHHmmss").parse(request.getOrder().getReservationDate()));
             service.createDineInOrder(request.getRestaurantId(), dIOQ);
             responseObserver.onNext(SuccessOrNot.newBuilder().setStatusCode(200).build());
         }catch (ParseException e){
@@ -92,7 +92,7 @@ public class AlmaOnlineServerGrpcAdapter extends AlmaOnlineGrpc.AlmaOnlineImplBa
                 items.add(itemM.getName());
             }
             DeliveryOrderQuote dOQ = new DeliveryOrderQuote(orderM.getId(),
-                    new SimpleDateFormat("yyyy-MM-DD").parse(orderM.getCreationDate()),
+                    new SimpleDateFormat("yyyyMMddHHmmss").parse(orderM.getCreationDate()),
                     orderM.getCustomer(), items, request.getOrder().getDeliveryAddress());
             service.createDeliveryOrder(request.getRestaurantId(),dOQ);
             responseObserver.onNext(SuccessOrNot.newBuilder().setStatusCode(200).build());
@@ -106,18 +106,29 @@ public class AlmaOnlineServerGrpcAdapter extends AlmaOnlineGrpc.AlmaOnlineImplBa
     }
 
     @Override
-    public void getOrder(OrderRequest request, StreamObserver<OrderM> responseObserver) {
+    public void getOrder(OrderRequest request, StreamObserver<OrderDeliOrDine> responseObserver) {
         Order order = service.getOrder(request.getRestaurantId(), request.getOrderId()).get();
         var orderBuilder = OrderM.newBuilder();
         orderBuilder.setId(order.getId())
-                    .setCreationDate(new SimpleDateFormat("yyyy-DD-MM").format(order.getCreationDate()))
-                    .setCustomer(order.getCustomer());
+                .setCreationDate(new SimpleDateFormat("yyyyMMddHHmmss").format(order.getCreationDate()))
+                .setCustomer(order.getCustomer());
         for (Item item:order.getItems()
-             ) {
+        ) {
             var itemMBuilder = ItemM.newBuilder().setName(item.getName()).setPrice(item.getPrice());
             orderBuilder.addItems(itemMBuilder);
         }
-        responseObserver.onNext(orderBuilder.build());
+        var dineOrDeliveryBuilder = OrderDeliOrDine.newBuilder();
+        dineOrDeliveryBuilder.setOrder(orderBuilder);
+        if(order instanceof DeliveryOrder){
+            DeliveryOrder deliveryOrder = (DeliveryOrder)order;
+            dineOrDeliveryBuilder.setDeliveryAddress(deliveryOrder.getDeliveryAddress()).setReservationDate("");
+        }
+        else if(order instanceof DineInOrder){
+            DineInOrder dineInOrder = (DineInOrder) order;
+            dineOrDeliveryBuilder.setDeliveryAddress("").setReservationDate(new SimpleDateFormat("yyyyMMddHHmmss").format(((DineInOrder) order).getReservationDate()));
+        }
+
+        responseObserver.onNext(dineOrDeliveryBuilder.build());
         responseObserver.onCompleted();
     }
 }

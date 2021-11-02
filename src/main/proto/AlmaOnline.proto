@@ -14,7 +14,7 @@ service AlmaOnline {
     rpc GetMenu(RestaurantIDRequest) returns (MenuM);
     rpc CreateDineInOrder(DineInOrderRequest) returns (SuccessOrNot);
     rpc CreateDeliveryOrder(DeliveryOrderRequest) returns (SuccessOrNot);
-    rpc GetOrder(OrderRequest) returns (OrderM);
+    rpc GetOrder(OrderRequest) returns (OrderDeliOrDine);
 }
 
 message Empty{}
@@ -86,4 +86,10 @@ message RestaurantInformation{
 
 message RestaurantsInformation{
     repeated RestaurantInformation restaurantInfo = 1;
+}
+
+message OrderDeliOrDine{
+    OrderM order = 1;
+    string deliveryAddress = 2;
+    string reservationDate = 3;
 }

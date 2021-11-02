@@ -45,10 +45,10 @@ public class AlmaOnlineClientGrpcAdapter implements AlmaOnlineClientAdapter {
              ) {
             orderM.addItems(ItemM.newBuilder().setName(itemName));
         }
-        orderM.setCustomer(order.getCustomer()).setCreationDate(new SimpleDateFormat("yyyy-MM-DD").format(new Date()))
+        orderM.setCustomer(order.getCustomer()).setCreationDate(new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()))
                 .setId(order.getOrderId());
         var dIOM = DineInOrderM.newBuilder().setOrder(orderM)
-                .setReservationDate(new SimpleDateFormat("yyyy-MM-DD").format(order.getReservationDate()));
+                .setReservationDate(new SimpleDateFormat("yyyyMMddHHmmss").format(order.getReservationDate()));
         var request = DineInOrderRequest.newBuilder().setRestaurantId(order.getRestaurantId()).setOrder(dIOM).build();
         var response = stub.createDineInOrder(request);
         return response;
@@ -62,7 +62,7 @@ public class AlmaOnlineClientGrpcAdapter implements AlmaOnlineClientAdapter {
         ) {
             orderM.addItems(ItemM.newBuilder().setName(itemName));
         }
-        orderM.setCustomer(order.getCustomer()).setCreationDate(new SimpleDateFormat("yyyy-MM-DD").format(new Date()))
+        orderM.setCustomer(order.getCustomer()).setCreationDate(new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()))
                 .setId(order.getOrderId());
         var dOM = DeliveryOrderM.newBuilder().setOrder(orderM).setDeliveryAddress(order.getDeliveryAddress());
         var request = DeliveryOrderRequest.newBuilder().setRestaurantId(order.getRestaurantId()).setOrder(dOM).build();
@@ -78,11 +78,20 @@ public class AlmaOnlineClientGrpcAdapter implements AlmaOnlineClientAdapter {
             var request = OrderRequest.newBuilder().setOrderId(orderId).setRestaurantId(restaurantId).build();
             var response = stub.getOrder(request);
             List<ItemInfo> iInfos = new ArrayList<>();
-            for (ItemM itemM:response.getItemsList()
-                 ) {
+            for (ItemM itemM:response.getOrder().getItemsList()
+            ) {
                 iInfos.add(new ItemInfo(itemM.getName(), itemM.getPrice()));
             }
-            return new BaseOrderInfo(response.getCustomer(), new SimpleDateFormat("yyyy-MM-DD").parse(response.getCreationDate()), iInfos);
+            if(response.getDeliveryAddress() == ""){
+                return new DineInOrderInfo(response.getOrder().getCustomer(),
+                        new SimpleDateFormat("yyyyMMddHHmmss").parse(response.getOrder().getCreationDate()),iInfos,
+                        new SimpleDateFormat("yyyyMMddHHmmss").parse(response.getReservationDate()));
+            }
+            else{
+                return new DeliveryOrderInfo(response.getOrder().getCustomer(),
+                        new SimpleDateFormat("yyyyMMddHHmmss").parse(response.getOrder().getCreationDate()),iInfos,
+                        response.getDeliveryAddress());
+            }
         }catch (ParseException e){
             e.printStackTrace();
         }

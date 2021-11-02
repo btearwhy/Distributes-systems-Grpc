@@ -43,7 +43,9 @@ org\example\AlmaOnline\server\DineInOrderRequest.class
 org\example\AlmaOnline\server\ItemM.class
 org\example\AlmaOnline\server\OrderRequest$Builder.class
 org\example\AlmaOnline\defaults\Initializer.class
+org\example\AlmaOnline\server\OrderDeliOrDine$1.class
 org\example\AlmaOnline\server\SuccessOrNot$Builder.class
+org\example\AlmaOnline\server\OrderDeliOrDine.class
 org\example\AlmaOnline\server\RestaurantsInformation.class
 org\example\AlmaOnline\server\AlmaOnlineGrpc.class
 org\example\AlmaOnline\server\SuccessOrNot$1.class
@@ -70,6 +72,7 @@ org\example\AlmaOnline\server\Empty.class
 org\example\AlmaOnline\server\RestaurantM$Builder.class
 org\example\AlmaOnline\server\DineInOrderMOrBuilder.class
 org\example\AlmaOnline\provided\service\DeliveryOrder.class
+org\example\AlmaOnline\server\OrderDeliOrDine$Builder.class
 org\example\AlmaOnline\server\AlmaOnlineGrpc$2.class
 org\example\AlmaOnline\server\RestaurantM.class
 org\example\AlmaOnline\server\Empty$Builder.class
@@ -81,6 +84,7 @@ org\example\AlmaOnline\server\DineInOrderM.class
 org\example\AlmaOnline\required\AlmaOnlineClientGrpcAdapter.class
 org\example\AlmaOnline\server\ItemMOrBuilder.class
 org\example\AlmaOnline\provided\service\DineInOrderQuote.class
+org\example\AlmaOnline\server\OrderDeliOrDineOrBuilder.class
 org\example\AlmaOnline\server\DineInOrderM$1.class
 org\example\AlmaOnline\provided\service\Menu.class
 org\example\AlmaOnline\server\DeliveryOrderRequest$1.class
