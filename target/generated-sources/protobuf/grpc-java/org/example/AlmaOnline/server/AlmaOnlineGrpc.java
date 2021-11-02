@@ -139,28 +139,28 @@ public final class AlmaOnlineGrpc {
   }
 
   private static volatile io.grpc.MethodDescriptor<org.example.AlmaOnline.server.OrderRequest,
-      org.example.AlmaOnline.server.OrderM> getGetOrderMethod;
+      org.example.AlmaOnline.server.OrderDeliOrDine> getGetOrderMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "GetOrder",
       requestType = org.example.AlmaOnline.server.OrderRequest.class,
-      responseType = org.example.AlmaOnline.server.OrderM.class,
+      responseType = org.example.AlmaOnline.server.OrderDeliOrDine.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
   public static io.grpc.MethodDescriptor<org.example.AlmaOnline.server.OrderRequest,
-      org.example.AlmaOnline.server.OrderM> getGetOrderMethod() {
-    io.grpc.MethodDescriptor<org.example.AlmaOnline.server.OrderRequest, org.example.AlmaOnline.server.OrderM> getGetOrderMethod;
+      org.example.AlmaOnline.server.OrderDeliOrDine> getGetOrderMethod() {
+    io.grpc.MethodDescriptor<org.example.AlmaOnline.server.OrderRequest, org.example.AlmaOnline.server.OrderDeliOrDine> getGetOrderMethod;
     if ((getGetOrderMethod = AlmaOnlineGrpc.getGetOrderMethod) == null) {
       synchronized (AlmaOnlineGrpc.class) {
         if ((getGetOrderMethod = AlmaOnlineGrpc.getGetOrderMethod) == null) {
           AlmaOnlineGrpc.getGetOrderMethod = getGetOrderMethod =
-              io.grpc.MethodDescriptor.<org.example.AlmaOnline.server.OrderRequest, org.example.AlmaOnline.server.OrderM>newBuilder()
+              io.grpc.MethodDescriptor.<org.example.AlmaOnline.server.OrderRequest, org.example.AlmaOnline.server.OrderDeliOrDine>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetOrder"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   org.example.AlmaOnline.server.OrderRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  org.example.AlmaOnline.server.OrderM.getDefaultInstance()))
+                  org.example.AlmaOnline.server.OrderDeliOrDine.getDefaultInstance()))
               .setSchemaDescriptor(new AlmaOnlineMethodDescriptorSupplier("GetOrder"))
               .build();
         }
@@ -248,7 +248,7 @@ public final class AlmaOnlineGrpc {
     /**
      */
     public void getOrder(org.example.AlmaOnline.server.OrderRequest request,
-        io.grpc.stub.StreamObserver<org.example.AlmaOnline.server.OrderM> responseObserver) {
+        io.grpc.stub.StreamObserver<org.example.AlmaOnline.server.OrderDeliOrDine> responseObserver) {
       io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetOrderMethod(), responseObserver);
     }
 
@@ -287,7 +287,7 @@ public final class AlmaOnlineGrpc {
             io.grpc.stub.ServerCalls.asyncUnaryCall(
               new MethodHandlers<
                 org.example.AlmaOnline.server.OrderRequest,
-                org.example.AlmaOnline.server.OrderM>(
+                org.example.AlmaOnline.server.OrderDeliOrDine>(
                   this, METHODID_GET_ORDER)))
           .build();
     }
@@ -342,7 +342,7 @@ public final class AlmaOnlineGrpc {
     /**
      */
     public void getOrder(org.example.AlmaOnline.server.OrderRequest request,
-        io.grpc.stub.StreamObserver<org.example.AlmaOnline.server.OrderM> responseObserver) {
+        io.grpc.stub.StreamObserver<org.example.AlmaOnline.server.OrderDeliOrDine> responseObserver) {
       io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getGetOrderMethod(), getCallOptions()), request, responseObserver);
     }
@@ -392,7 +392,7 @@ public final class AlmaOnlineGrpc {
 
     /**
      */
-    public org.example.AlmaOnline.server.OrderM getOrder(org.example.AlmaOnline.server.OrderRequest request) {
+    public org.example.AlmaOnline.server.OrderDeliOrDine getOrder(org.example.AlmaOnline.server.OrderRequest request) {
       return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getGetOrderMethod(), getCallOptions(), request);
     }
@@ -446,7 +446,7 @@ public final class AlmaOnlineGrpc {
 
     /**
      */
-    public com.google.common.util.concurrent.ListenableFuture<org.example.AlmaOnline.server.OrderM> getOrder(
+    public com.google.common.util.concurrent.ListenableFuture<org.example.AlmaOnline.server.OrderDeliOrDine> getOrder(
         org.example.AlmaOnline.server.OrderRequest request) {
       return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getGetOrderMethod(), getCallOptions()), request);
@@ -494,7 +494,7 @@ public final class AlmaOnlineGrpc {
           break;
         case METHODID_GET_ORDER:
           serviceImpl.getOrder((org.example.AlmaOnline.server.OrderRequest) request,
-              (io.grpc.stub.StreamObserver<org.example.AlmaOnline.server.OrderM>) responseObserver);
+              (io.grpc.stub.StreamObserver<org.example.AlmaOnline.server.OrderDeliOrDine>) responseObserver);
           break;
         default:
           throw new AssertionError();

@@ -89,6 +89,11 @@ public final class AlmaOnlineProto {
   static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_almaonline_RestaurantsInformation_fieldAccessorTable;
+  static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_almaonline_OrderDeliOrDine_descriptor;
+  static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_almaonline_OrderDeliOrDine_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -123,18 +128,20 @@ public final class AlmaOnlineProto {
       "staurantInformation\022\n\n\002id\030\001 \001(\t\022\014\n\004name\030" +
       "\002 \001(\t\"S\n\026RestaurantsInformation\0229\n\016resta" +
       "urantInfo\030\001 \003(\0132!.almaonline.RestaurantI" +
-      "nformation2\360\002\n\nAlmaOnline\022G\n\016GetRestaura" +
-      "nts\022\021.almaonline.Empty\032\".almaonline.Rest" +
-      "aurantsInformation\022=\n\007GetMenu\022\037.almaonli" +
-      "ne.RestaurantIDRequest\032\021.almaonline.Menu" +
-      "M\022M\n\021CreateDineInOrder\022\036.almaonline.Dine" +
-      "InOrderRequest\032\030.almaonline.SuccessOrNot" +
-      "\022Q\n\023CreateDeliveryOrder\022 .almaonline.Del" +
-      "iveryOrderRequest\032\030.almaonline.SuccessOr" +
-      "Not\0228\n\010GetOrder\022\030.almaonline.OrderReques" +
-      "t\032\022.almaonline.OrderMB7\n\035org.example.Alm" +
-      "aOnline.serverB\017AlmaOnlineProtoP\001\242\002\002AOb\006" +
-      "proto3"
+      "nformation\"f\n\017OrderDeliOrDine\022!\n\005order\030\001" +
+      " \001(\0132\022.almaonline.OrderM\022\027\n\017deliveryAddr" +
+      "ess\030\002 \001(\t\022\027\n\017reservationDate\030\003 \001(\t2\371\002\n\nA" +
+      "lmaOnline\022G\n\016GetRestaurants\022\021.almaonline" +
+      ".Empty\032\".almaonline.RestaurantsInformati" +
+      "on\022=\n\007GetMenu\022\037.almaonline.RestaurantIDR" +
+      "equest\032\021.almaonline.MenuM\022M\n\021CreateDineI" +
+      "nOrder\022\036.almaonline.DineInOrderRequest\032\030" +
+      ".almaonline.SuccessOrNot\022Q\n\023CreateDelive" +
+      "ryOrder\022 .almaonline.DeliveryOrderReques" +
+      "t\032\030.almaonline.SuccessOrNot\022A\n\010GetOrder\022" +
+      "\030.almaonline.OrderRequest\032\033.almaonline.O" +
+      "rderDeliOrDineB7\n\035org.example.AlmaOnline" +
+      ".serverB\017AlmaOnlineProtoP\001\242\002\002AOb\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -231,6 +238,12 @@ public final class AlmaOnlineProto {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_almaonline_RestaurantsInformation_descriptor,
         new java.lang.String[] { "RestaurantInfo", });
+    internal_static_almaonline_OrderDeliOrDine_descriptor =
+      getDescriptor().getMessageTypes().get(15);
+    internal_static_almaonline_OrderDeliOrDine_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_almaonline_OrderDeliOrDine_descriptor,
+        new java.lang.String[] { "Order", "DeliveryAddress", "ReservationDate", });
     com.google.protobuf.TimestampProto.getDescriptor();
   }
 
